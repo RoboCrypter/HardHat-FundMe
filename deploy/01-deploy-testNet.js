@@ -1,5 +1,5 @@
 const { network } = require("hardhat")
-const {networkConfig, devChainId} = require("../helper-hardhat-config")
+const { networkConfig, devChainId } = require("../helper-hardhat-config")
 
 // async function testFunc() {
 //     hre.getNamedAccounts
@@ -23,9 +23,10 @@ module.exports = async ({getNamedAccounts, deployments}) => {
     const { deployer } = await getNamedAccounts()
     const chainId = network.config.chainId
 
-   //  ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
+   
 
    let ethUsdPriceFeedAddress
+
 
    if(chainId == devChainId) {
       const ethUsdAggregator = await deployments.get("MockV3Aggregator")
@@ -36,9 +37,9 @@ module.exports = async ({getNamedAccounts, deployments}) => {
    }
    
 
-    const fundMe = await deploy("FundMe", {
+   await deploy("FundMe", {
         from: deployer,
-        args: [ethUsdPriceFeedAddress], // we have to put priceFeedAddress in there, these are basically Constructor args of FundMe Contract.
+        args: [ethUsdPriceFeedAddress], // we have to put "priceFeedAddress" in there, these are basically Constructor args of FundMe Contract.
      // address: [/*accounts*/],
         log: true,
         waitConfirmations: network.config.blockConfirmations || 1

@@ -24,7 +24,5 @@ library ConversionRate {
         uint256 ethPrice = ethToUsd(priceFeedAddress);
         uint256 amountInUsd = (ethPrice * _ethAmount) / 1e18;
         return amountInUsd;
-
     }
-
 }

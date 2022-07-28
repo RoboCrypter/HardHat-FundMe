@@ -1,9 +1,9 @@
 const { expect } = require("chai")
 const { getNamedAccounts, ethers, network } = require("hardhat")
-const {devChains} = require("../../helper-hardhat-config")
+const { devNetworks } = require("../../helper-hardhat-config")
 
-devChains.includes(network.name) ? describe.skip:
-describe("Running Staging test on FundMe Contract", async() => {
+devNetworks.includes(network.name) ? describe.skip:
+describe("Running Staging test on FundMe Contract", () => {
 
     let fundMe
     let deployer

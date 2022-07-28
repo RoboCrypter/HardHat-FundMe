@@ -9,14 +9,14 @@ const networkConfig = {
     },
 }
 
-const devChains = ["hardhat", "localhost"]
+const devNetworks = ["hardhat", "localhost"]
 const devChainId = 31337
 const DECIMALS = 8
 const INITIAL_ANSWER = 100000000000
 
 module.exports = {
     networkConfig,
-    devChains,
+    devNetworks,
     devChainId,
     DECIMALS,
     INITIAL_ANSWER,

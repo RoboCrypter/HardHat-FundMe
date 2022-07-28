@@ -25,6 +25,15 @@ import "./ConversionRate.sol";
 // 3. ERRORS
 error FundMe__Not_Owner_FBI_OPEN_UP();
 error Less_Than_Minimum_Amount();
+
+
+/**
+*@title FundMe Contract.
+*@author ABossOfMyself.
+*@notice A Contract which is able to "fund" and "withdraw".
+ */
+
+
 // 4. CONTRACT, LIBRARIES, INTERFACES
 contract FundMe {
 
@@ -64,23 +73,23 @@ contract FundMe {
         s_priceFeed = AggregatorV3Interface(s_priceFeedAddress);
     }
 
-       /// For our 'test' we are turning off our 'recieve' and 'fallback' functions.
+
 
 ///B.  Receive
 
-    // receive() external payable {
-    //     fund();
-    // }
+    receive() external payable {
+        fund();
+    }
 
 ///C.  Fallback    
 
-    // fallback() external payable {
-    //     fund();
-    // }
+    fallback() external payable {
+        fund();
+    }
 
 
 ///D.  External
-    // Not present in the contract.
+    // The above "recieve()" and "fallback()" are also External Functions.
 
 ///E.  Public
 
@@ -111,7 +120,7 @@ contract FundMe {
         // require(transferSuccess, "Transfer Failed");
 
         // Method # 3  "call"
-        (bool transferSuccess,) = i_owner.call{value: (address(this).balance)}("");
+        (bool transferSuccess, ) = i_owner.call{value: (address(this).balance)}("");
         require(transferSuccess, "Transfer Failed");
     }
 

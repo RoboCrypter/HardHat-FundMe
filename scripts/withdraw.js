@@ -1,4 +1,4 @@
-const {getNamedAccounts, ethers} = require("hardhat")
+const { getNamedAccounts, ethers } = require("hardhat")
 
 async function main() {
     const {deployer} = (await getNamedAccounts()).deployer

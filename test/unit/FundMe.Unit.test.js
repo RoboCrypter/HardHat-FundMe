@@ -1,10 +1,10 @@
 const { expect } = require("chai")
-const {deployments, ethers, getNamedAccounts, network} = require("hardhat")
-const {devChains} = require("../../helper-hardhat-config")
+const { deployments, ethers, getNamedAccounts, network } = require("hardhat")
+const { devNetworks } = require("../../helper-hardhat-config")
 
-!devChains.includes(network.name) ? describe.skip:
+!devNetworks.includes(network.name) ? describe.skip:
 
-describe("Running Unit test on FundMe Contract", async () => {
+describe("Running Unit test on FundMe Contract", () => {
 
     let fundMe
     let deployer
@@ -12,7 +12,7 @@ describe("Running Unit test on FundMe Contract", async () => {
     let fundedAmount = ethers.utils.parseEther("1") // :  this is for "bigNumber" conversion.
 
 
-    beforeEach("deploying the FundMe contract", async () => {
+    beforeEach("Deploying the FundMe contract", async () => {
     //    const accounts = await ethers.getSigner()
     //    const accountZero = accounts[0]              :this is if you wanna test it on a specific "account"
        deployer = (await getNamedAccounts()).deployer
@@ -21,14 +21,14 @@ describe("Running Unit test on FundMe Contract", async () => {
        mockV3Aggregator = await ethers.getContract("MockV3Aggregator", deployer)
     })
 
-    describe("constructor", async () => {
+    describe("constructor", () => {
     it( "It will give us the correct PriceFeed" , async () => {
         const response = await fundMe.getPriceFeed()
         expect(response).to.equal(mockV3Aggregator.address)
      })
     })
 
-    describe("fund", async () => {
+    describe("fund", () => {
         it("Should send more than the minimum amount of ETH", async () => {
         //  await expect(fundMe.fund()).to.be.reverted
         /// Or with error Statement,
@@ -50,7 +50,7 @@ describe("Running Unit test on FundMe Contract", async () => {
         })
     })
 
-    describe("withdraw", async () => {           //: for withdraw you should have some fund in your contract
+    describe("withdraw", () => {           //: for withdraw you should have some fund in your contract
         beforeEach("funding the contract first", async () =>{
             await fundMe.fund({value: fundedAmount})
         })
@@ -120,7 +120,7 @@ describe("Running Unit test on FundMe Contract", async () => {
          })
     })
 
-    describe("cheaperWithdraw", async () => {           //: for withdraw you should have some fund in your contract
+    describe("cheaperWithdraw", () => {           //: for withdraw you should have some fund in your contract
         beforeEach("funding the contract first", async () =>{
             await fundMe.fund({value: fundedAmount})
         })

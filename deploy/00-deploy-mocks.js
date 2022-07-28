@@ -1,5 +1,5 @@
 const { network } = require("hardhat")
-const {devChains, DECIMALS, INITIAL_ANSWER} = require("../helper-hardhat-config")
+const { devNetworks, DECIMALS, INITIAL_ANSWER } = require("../helper-hardhat-config")
 
 // module.exports = async (hre) => {        // "hre" is called "hardhat run time enviroment".
 //     hre.deployments
@@ -11,8 +11,8 @@ module.exports = async ({getNamedAccounts, deployments}) => {
     const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()
 
-    if (devChains.includes(network.name)) {
-        log("Dev_Chains Detected....deploying")      // Or "console.log"  are the same thing.
+    if (devNetworks.includes(network.name)) {
+        log("Dev_Networks Detected....deploying")      // Or "console.log"  are the same thing.
 
         await deploy("MockV3Aggregator", {
             from: deployer,
